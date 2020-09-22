@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block title %}
+<title>Detail Pemesanan</title>
+{% endblock title %}
+
+{% block content %}
+<article class="post">
+    <div class="container">
+        <h3>Pesanan Kamu sedang di proses</h3>
+        <table class="table table-bordered bg-light">
+            <tbody>
+                <tr>
+                    <th scope="row">Username</th>
+                    <td>{{orderan.user.username}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Nama Lengkap</th>
+                    <td colspan="2">{{orderan.user.first_name}} {{orderan.user.last_name}}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Id Transaksi</th>
+                    <td>{{ order_id }}<br/><div class="text-danger">Harap Id Transaksi ini diingat untuk melakukan pembayaran</div></td>
+                </tr>
+                <tr>
+                    <th scope="row">Harga Total</th>
+                    <td colspan="2">Rp. {{ orderan.Cart.total|intcomma }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Tanggal Transaksi</th>
+                    <td colspan="2">{{orderan.timestamp|date:"l, d F Y"}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <h3>Bayar pesanan kamu ke</h3>
+        <h4>No Rekening BNI :</h4>
+        <h4>0388705758 a/n Zulfikar Chamim</h4>
+        <br/><br/>
+        <h4><a class="btn btn-info" href="{% url 'orders:uploadBukti' %}?idTrs={{order_id}}&usrnm={{orderan.user.username}}">Upload Bukti Disni</a></h4>
+        <h4><a class="btn btn-success" href="{% url 'menu:index' %}semua"> Yuk Belanja lagi!</a></h4>
+    </div>
+</article>
+{% endblock content %}

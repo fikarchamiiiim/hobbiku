@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Pesanan</title>
+{% endblock title %}
+
+{% block content %}
+    {% comment %} <h3>{{ orderan.user.first_name }} {{orderan.user.last_name}}</h3> {% endcomment %}
+    <table class="table table-striped mx-auto w-75 bg-light">
+            <thead class="thead-dark">
+                <th>No</th>
+                <th>Nama Barang</th>
+                <th>Harga Barang</th>
+                <th>Jumlah</th>
+                <th></th>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>Total : {{total}}</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        {% for item in keranjang %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>
+                    {{ item.products.judulMenu }}
+                    
+                    {% if item.variation.all %}
+                    <ul>{% for subitem in item.variation.all %}
+                            <li>{{ subitem.category|capfirst }} : {{ subitem.title|capfirst }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                        
+                </td>
+                <td>{{ item.products.hargaMenu }}</td>
+                <td>{{ item.quantity }}</td>
+                <td></td>
+            </tr>
+        {% endfor %}
+            
+    </table>
+{% endblock content %}

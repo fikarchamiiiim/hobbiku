@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}
+<title>Keranjang</title>
+{% endblock title %}
+{% block content %}
+
+
+    {% if empty %}
+
+    <h3>{{ empty_message }}</h3>
+
+    {% else %}
+    <table class="table mx-auto bg-light text-dark">
+            <thead>
+                <th>Nama Barang</th>
+                <th>Harga Barang</th>
+                <th>Jumlah</th>
+                <th></th>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td><a href="{% url 'orders:Checkout' %}" class="btn btn-light" >Checkout</a></td>
+                    <td></td>
+                    <td>Total : Rp. {{cart.total|intcomma}}</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        {% for item in cart.cartitem_set.all %}
+            <tr>
+                <td>
+                    {{ item.products }}
+                    
+                    {% if item.variation.all %}
+                    <ul>{% for subitem in item.variation.all %}
+                            <li>{{ subitem.category|capfirst }} : {{ subitem.title|capfirst }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                        
+                </td>
+                <td>Rp. {{ item.products.hargaMenu|intcomma }}</td>
+                <td>{{ item.quantity }}</td>
+                <td><a href="{% url 'cart:removeKeranjang' item.id %}" class="text-white">Hapus</a></td>
+            </tr>
+        {% endfor %}
+        
+            
+    </table>
+    
+    {% endif %}
+{% endblock content %}
+    

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load thumbnail %}
+
+
+{% block title %}
+<title>Catalogg</title>
+{% endblock title %}
+
+{% block content %}
+<article class="post">
+  <div class="container">
+    <h3>{{ title }}</h3>
+    <div class="row pilihan">
+      {% for menu in Menus %}
+      <div class="col-sm-2">
+        <div class="card" style="">
+          {% thumbnail menu.picMenu "300x300" crop="80% center" as im %}
+          <a href="{% url 'menu:produkSatuan' category menu.slug %}"> <img class="card-img-top" src="{{ im.url }}"
+              width="{{ im.width }}" height="{{ im.height }}"></a>
+          {% endthumbnail %}
+          <div class="card-body">
+            <h5 class="card-title">{{menu.judulMenu}}</h5>
+            <h5 class="card-text text-info">Rp {{menu.hargaMenu|intcomma}}</h5>
+            {% comment %} <p class="card-text">{{menu.descMenu|truncatewords:15}}</p> {% endcomment %}
+            <button class="btn btn-success" onclick="window.location.href='{{menu.slug}}'">Lihat Produk</button>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="row">
+      {% if Menus.has_other_pages %}
+      <ul class="pagination">
+        {% if Menus.has_previous %}
+        <li><a class="btn btn-outline-info mb-4 mr-2" href="?page={{ Menus.previous_page_number }}">«</a></li>
+        {% else %}
+        <li class="disabled btn btn-outline-info mb-4 mr-2"><span>«</span></li>
+        {% endif %}
+        {% for i in Menus.paginator.page_range %}
+        {% if Menus.number == i %}
+        <li class="active btn btn-outline-info mb-4 mr-2"><span>{{ i }} <span class="sr-only">(current)</span></span>
+        </li>
+        {% else %}
+        <li><a class="btn btn-outline-info mb-4 mr-2" href="?page={{ i }}">{{ i }}</a></li>
+        {% endif %}
+        {% endfor %}
+        {% if Menus.has_next %}
+        <li><a class="btn btn-outline-info mb-4 mr-2" href="?page={{ Menus.next_page_number }}">»</a></li>
+        {% else %}
+        <li class="disabled btn btn-outline-info mb-4 mr-2"><span>»</span></li>
+        {% endif %}
+      </ul>
+      {% endif %}
+    </div>
+  </div>
+</article>
+{% endblock content %}

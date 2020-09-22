@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% load thumbnail %}
+
+{% block title %}
+<title>{{ Menus.judulMenu }}</title>
+{% endblock title %}
+{% block content %}
+<article class="post">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6 postingan ">
+        <img src="{{ Menus.picMenu.url }}" width="400px" alt="Sample Image" class="item-image CustomShadow" />
+      </div>
+      <div class="col-md-6">
+        <div id="container-beli" class="bg-light CustomShadow">
+          <h2>{{item_name}}</h2>
+
+          <p>{{Menus.descMenu}}</p>
+          <h3>Rp. {{Menus.hargaMenu|intcomma}},-</h3>
+          <div class="aksi">
+            <form method="POST" action="{% url 'cart:updateCart' Menus.id Menus.slug %}">
+              {% csrf_token %}
+              <div class="col-sm-12">
+                <div class="row mb-2 mt-4 beli__quantity">
+                  <span>QTY : </span>
+                  <input class="form-control" name="qty" type="number" value="1" placeholder="Jumlah"
+                    style="display: inline; width: 20%;">
+                </div>
+                <div class="row mb-2">
+                  {% if Menus.variation_set.all %}
+                  {% if Menus.variation_set.sizes %}
+                  <select class="form-control" name="size">
+                    <option value="" disabled selected>Ukuran</option>
+                    {% for item in Menus.variation_set.sizes %}
+                    <option value="{{ item.title|lower }}">{{ item.title|capfirst }}</option>
+                    {% endfor %}
+                  </select>
+                  {% endif %}
+                </div>
+                <div class="row mb-2">
+                  {% if Menus.variation_set.colors %}
+                  <select class="form-control" name="color">
+                    <option value="" disabled selected>Warna</option>
+                    {% for item in Menus.variation_set.colors %}
+                    <option value="{{ item.title|lower }}">{{ item.title|capfirst }}</option>
+                    {% endfor %}
+                  </select>
+                  {% endif %}
+                  {% endif %}
+                </div>
+                <div class="row mb-2"><input class="btn btn-success" type="submit" value="Masukan Keranjang"></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+{% endblock content %}

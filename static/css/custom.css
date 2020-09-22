@@ -1,0 +1,233 @@
+.col-md-6.postingan{
+    display: flex;
+    justify-content: center;
+}
+.col-md-6.postingan img{
+    height: 500px;
+    width: 500px;
+    object-fit: contain;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+}
+
+#carouselExampleControls{
+    width: 100%;
+}
+
+#carouselExampleControls .carousel-item img{
+    height: 28rem;
+    object-fit: cover;
+}
+
+.card{
+    box-shadow: 0 2px 10px 0 rgba(0,0,0,0.25);
+    margin-top: 2rem;
+}
+
+.card h5{
+    font-size: 1rem;
+}
+
+.CustomShadow{
+    box-shadow:0 0 4px 0 rgba(14, 14, 14, 0.1);
+    border-radius: 0px;
+    
+}
+
+.beli__quantity span{
+    margin-right: 2rem;
+    line-height: 2rem;
+}
+
+#container-beli{
+    padding: 2rem;
+}
+
+.footer{
+    /* background: brown;
+    color: white;
+    padding: 0.9375em;
+    text-align: center;
+    font-size: 0.8125em;
+    position: absolute;
+    width: 100%;
+    bottom: 0; */
+}
+
+.pilihan .card{
+    width: 12rem; height: 100%; margin-bottom: 8px;
+}
+
+.card-img-top{
+    width: 100%;
+    height: 10rem;
+    object-fit: contain;
+}
+
+.konten table{
+    width: 80%;
+}
+
+.div__category .row{
+    justify-content: center;
+}
+
+.thumbnail-categories{
+    margin-bottom: 20px;
+    display: grid;
+    background: #e5e5e5;
+    grid-gap: 2px 2px;
+    border: 2px solid #e5e5e5;
+    -webkit-box-shadow: -1px -1px 15px 3px #e5e5e5;
+    -moz-box-shadow: -1px -1px 15px 3px #e5e5e5;
+    box-shadow: -1px -1px 15px 3px #e5e5e5;
+    border-radius: 4px;
+    overflow: hidden;
+    grid-template-columns: calc((100% - 18px) / 10) calc((100% - 18px) / 10) calc((100% - 18px) / 10) calc((100% - 18px) / 10) calc((100% - 18px) / 10) calc((100% - 18px) / 10) calc((100% - 18px) / 10) calc((100% - 18px) / 10) calc((100% - 18px) / 10) calc((100% - 18px) / 10);
+}
+
+.item_category{
+    background: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+.item_category img{
+    display: block;
+    padding-top: 10px;
+    width: 75%;
+    height: auto;
+    margin: auto;
+}
+.item_category .item_title{
+    display: block;
+    color: #FC4C02;
+    font-size: 1.2em;
+    margin: 10px 0;
+    padding: 0 5px;
+    text-align: center;
+    color: #2a2a2a;
+    font-size: 14px;
+}
+
+footer{
+    border-top: 1px solid #d1d3d4;
+    padding: 32px;
+    padding-bottom: 0px;
+    box-sizing: border-box;
+    background: #ffffff;
+    margin-top: 4rem;
+}
+
+footer .contact {
+    display: grid;
+    grid-template-columns: 20% 15% 15% 25% 25%;
+    justify-content: center;
+    width: 90%;
+    margin: 0px auto;
+}
+
+footer h4 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #606060;
+}
+
+footer .contact__help li, footer .contact__tos li {
+    font-size: 1.2em;
+}
+
+footer .contact__help li a, footer .contact__tos li a {
+    padding: 8px 0px;
+    display: inline-block;
+    color: #808080;
+}
+
+footer .contact__sosmed li {
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+}
+
+footer .contact__sosmed li > img {
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
+    margin-right: 8px;
+}
+
+footer .contact__sosmed li a{
+    margin-right: 1em;
+}
+
+footer .copyright {
+    margin: 0 auto;
+    margin-top: 10px;
+    width: 90%;
+    border-top: 1px solid #d1d3d4;
+    padding: 24px 0px;
+    display: flex;
+    align-items: center;
+}
+
+footer .copyright img {
+    height: 32px;
+}
+
+footer .copyright .tagline {
+    font-size: 14px;
+    margin-left: 20px;
+    color: #565252;
+    flex-grow: 1;
+}
+
+footer .copyright .copy, footer .copyright .privacy {
+    font-size: 14px;
+    color: #808080;
+}
+
+footer li,footer ol {
+    list-style: none;
+}
+
+footer ol, footer ul {
+    padding-left: 0;
+}
+
+footer a {
+    color: #565252;
+}
+
+footer a:hover {
+    color: #353232;
+    text-decoration: none;
+}
+
+.card-title {
+    min-height: 3.5rem;
+}
+
+@media (max-width: 1024px){
+    .col-md-6.postingan img{
+        width: 100%;
+    }
+    .card{
+        margin-top: 2rem;
+    }
+    footer.storepage-extend {
+        padding-bottom: 66px;
+    }
+
+    footer .contact {
+        grid-template-columns: 1fr;
+        width: 100%;
+    }
+
+    footer .contact div {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 16px;
+    }
+
+
+}

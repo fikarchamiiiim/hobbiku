@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+<title>Upload Bukti Pembayaran</title>
+{% endblock title %}
+
+{% block content %}
+<div class="post">
+    <div class="container">
+        <div class="mx-auto jumbotron w-75">
+            <div class="mx-auto w-75">
+                {% if uploaded %}
+                <h2>Terimakasih Telah Berbelanja di Hobbiku!</h2>
+                {% else %}
+                <h1>Upload Bukti Pembayaranmu Disini</h1>
+                <form method="POST" enctype="multipart/form-data">
+                    <table class="table">
+                        {% csrf_token %}
+                        <table style="border-collapse: separate;border-spacing: 0 15px">
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="username"><b>Username</b></label>
+                                </div>
+                                <div class="col-md-8">
+                                    {% if usrnm %}
+                                    <input class="form-control" required="required" type="text" id="username"
+                                        value="{{usrnm}}" name="username" placeholder="Username">
+                                    {% else %}
+                                    <input class="form-control" required="required" type="text" id="username"
+                                        name="username" placeholder="Username">
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="order_id"><b>Id Transaksi</b></label>
+                                </div>
+                                <div class="col-md-8">
+                                    {% if id_transaksi %}
+                                    <input class="form-control" required="required" type="text" id="username"
+                                        value="{{id_transaksi}}" name="order_id" placeholder="Id Transaksi">
+                                    {% else %}
+                                    <input class="form-control" required="required" type="text" id="username"
+                                        name="order_id" placeholder="Id Transaksi">
+                                    {% endif %}
+                                </div>
+                            </div>
+                            <div class="row">
+                            <div class="col-md-4">
+                                <label for="buktiPembayaran"><b>Bukti Pembayaran</b></label>
+                            </div>
+                            <div class="col-md-8">
+                            {{form|crispy}}
+                            </div>
+                            </div>
+                        </table>
+
+                    </table>
+                    <button type="submit" class="btn btn-success">Upload</button>
+                    {% if uploaded %}
+                    <script>
+                        msg();
+                    </script>
+                    {% endif %}
+                </form>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function msg() {
+        alert("Tidak");
+    }
+</script>
+{% endblock content %}

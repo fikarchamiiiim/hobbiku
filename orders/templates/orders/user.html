@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% load thumbnail %}
+
+{% block title %}
+<title>{{profile.first_name}} {{profile.last_name}}</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container-fluid w-75">
+
+    <div class="row">
+
+        <!-- Profile Picture -->
+        <div class="col-md-6 pt-3">
+            <div class="w-50 mx-auto mt-4">
+                {% if profile.userprofileinfo.profile_pic %}
+                {% thumbnail profile.userprofileinfo.profile_pic "200x200" crop="center" as im %}
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="rounded">
+                {% endthumbnail %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Atributes -->
+        <div class="col-md-6">
+            <div class="bg-light p-4 rounded mb-4">
+                <h3>Nama</h3>
+                <h4>{{profile.first_name}} {{profile.last_name}}</h4>
+                <h3>Username</h3>
+                <h4>{{profile.username}}</h4>
+                <h3>Alamat</h3>
+                <h5>{{profile.userprofileinfo.alamat}} Kel {{profile.userprofileinfo.Kelurahan}}
+                    Kec {{profile.userprofileinfo.Kecamatan}}, {{profile.userprofileinfo.Kota}},
+                    {{profile.userprofileinfo.Provinsi}}</h5>
+            </div>
+        </div>
+    </div>
+
+    <!-- Riwayat Pembelian -->
+    <div class="row">
+        <table class="table table-striped mx-auto mt-20 w-100 bg-light link-dark">
+            <thead class="thead-dark">
+                <th>No.</th>
+                <th>Tanggal</th>
+                <th>ID Pesanan</th>
+                <th>Harga Total</th>
+                <th>Status</th>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tfoot>
+            {% for i in orderan %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td>{{i.timestamp|date:"l, d F Y"}}</td>
+                <td><a href="{% url 'orders:lihatOrder' i.order_id i.user.get_username %}">{{i.order_id}}</a></td>
+                <td>Rp {{ i.Cart.total|floatformat|intcomma }}</td>
+                {% if i.status == "Selesai"  %}
+                <td>Selesai</td>
+                {% else %}
+                <td>Belum Selesai</td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock content %}

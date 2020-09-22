@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row" style="justify-content: center;">
+    <div class="div__reqUnique"
+        style="border: 1px solid black; width: 22rem; padding: 1rem; border-radius: 5px; display: flex; flex-direction: column;">
+        <span>Unique Request</span>
+        <form action="POST">
+            {% csrf_token %}
+            <input type="text" name="reqUnique" id="" placeholder="Masukan Link Barang Yang Kamu Mau">
+            <button type="submit" class="btn btn-success">Kirim</button>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

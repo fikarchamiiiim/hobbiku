@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+{% block title %}
+<title>Hasil Pencarian</title>
+{% endblock title %}
+{% block content %}
+<article class="post">
+    <div class="row">
+        {% for menu in Menus %}
+        <div class="col-sm-3">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{{ menu.picMenu.url }}" alt="">
+                <div class="card-body">
+                    <h5 class="card-title">{{menu.judulMenu}}</h5>
+                    <h5 class="card-text text-info">Rp {{menu.hargaMenu|intcomma}}</h5>
+                    <p class="card-text">{{menu.descMenu|truncatewords:15}}</p>
+                    <a href="{% url 'menu:produkSatuan' menu.JK menu.slug %}" class="btn btn-success">Lihat</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</article>
+{% endblock content %}

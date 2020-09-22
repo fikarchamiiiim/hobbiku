@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load humanize %}
+{% block title %}
+<title>Pesanan Masuk</title>
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+<h2>Pesanan Masuk</h2>
+
+<table class="table table-striped mx-auto w-100 bg-light link-dark">
+    <thead class="thead-dark">
+        <th>Tanggal</th>
+        <th>ID Pesanan</th>
+        <th>Nama Pelanggan</th>
+        <th>Harga Total</th>
+        <th>Bukti Pembayaran</th>
+        <th>Status</th>
+    </thead>
+    <tfoot>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tfoot>
+    {% for item in Orderan %}
+    <tr>
+        <td>{{item.timestamp|date:"l, d F Y"}}</td>
+        <td><a href="{% url 'orders:lihatOrder' item.order_id item.user.get_username %}" class="text-dark" >{{ item.order_id }}</a></td>
+        <td><a href="{% url 'akunLain' item.user.get_username %}"  class="text-dark" > {{ item.user.first_name }}  {{item.user.last_name}}</a></td>
+        <td>Rp {{ item.Cart.total|floatformat|intcomma }}</td>
+        <td>
+        {% if item.buktiPembayaran %}
+            <a href="{{ item.buktiPembayaran.url }}" class="btn btn-warning text-white">Lihat Bukti</a> 
+        {% else %}
+            <div class="btn btn-danger">Belum ada bukti</div>
+        {% endif %}
+        </td>
+        <td><a class="btn btn-success" href="{% url 'orders:selesaikanOrder' item.order_id %}" class="text-white">Selesai</a></td>
+    </tr>
+    {% endfor %}
+</table>
+<br/>
+</div>
+{% endblock content %}
